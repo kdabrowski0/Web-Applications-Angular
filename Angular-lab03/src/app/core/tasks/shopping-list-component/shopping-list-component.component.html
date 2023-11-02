@@ -1,0 +1,13 @@
+<div>
+  <h2>Lista Produktów</h2>
+  <button (click)="removeSelectedProducts()">Usuń zaznaczone</button>
+  <ul>
+    <li *ngFor="let product of products">
+      <span [ngClass]="{ 'crossed-out': product.checked }">{{
+        product.name
+      }}</span>
+      <button (click)="removeProduct(product.name)">Usuń</button>
+      <mat-checkbox (change)="checkProduct(product)">Kupione</mat-checkbox>
+    </li>
+  </ul>
+</div>

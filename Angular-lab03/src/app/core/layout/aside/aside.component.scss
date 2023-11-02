@@ -1,0 +1,49 @@
+$sidebar-width: 250px;
+
+aside {
+  width: $sidebar-width;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  transition: right 0.3s ease;
+  overflow-y: auto;
+  background-color: #333;
+  color: #fff;
+
+  &.hidden {
+    right: -#{$sidebar-width};  
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    li {
+      margin: 5px;
+    }
+  }
+
+  .close-button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    top: 10px;
+    right: 10px;
+  }
+}
+
+.button-to-toggle-menu {
+  cursor: pointer;
+  background-color: #444;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  margin: 10px;
+
+  &:hover {
+    background-color: #555;
+  }
+}
