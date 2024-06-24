@@ -1,0 +1,9 @@
+<button class="button-to-toggle-menu" (click)="toggleMenu()">Menu</button>
+<aside [ngClass]="{'hidden': !isMenuOpen}">
+    <button class="close-button" (click)="closeMenu()">&times;</button>
+    <ul>
+      <li>Option 1</li>
+      <li>Option 2</li>
+      <li>Option 3</li>
+    </ul>
+</aside>

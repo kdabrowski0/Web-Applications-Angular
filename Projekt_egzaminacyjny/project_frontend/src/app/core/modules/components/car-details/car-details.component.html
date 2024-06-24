@@ -1,0 +1,57 @@
+<div *ngIf="isFetching" class="loading-container">
+  <app-loading-modal></app-loading-modal>
+</div>
+
+<div *ngIf="!isFetching" class="car-details">
+  <div class="car-details__item">
+    <div class="car-details__item__info">
+      <div class="car-details__item__info__title">
+        Car Company Name: {{ car?.carCompanyName }}
+      </div>
+      <div class="car-details__item__info__description">
+        Car Model: {{ car?.carModel }}
+      </div>
+      <div class="car-details__item__info__description">
+        Car Year of Production: {{ car?.carYear }}
+      </div>
+      <div class="car-details__item__info__description">
+        Available Car Colors: {{ car?.carColors }}
+      </div>
+      <button mat-raised-button routerLink="/edit-car/{{ car?.carId }}">
+        Edit Car
+      </button>
+      <button mat-raised-button (click)="deleteCar()">Delete Car</button>
+      <mat-form-field class="car-details__comment-input">
+        <input
+          matInput
+          [(ngModel)]="newComment"
+          placeholder="Add a comment..."
+        />
+        <button
+          mat-raised-button
+          (click)="addComment()"
+          [disabled]="
+            !newComment || !newComment.trim() || newComment.trim().length < 5
+          "
+        >
+          Add Comment
+        </button>
+      </mat-form-field>
+
+      <div class="car-details__comment__section">
+        <p class="section-title">Comment Section:</p>
+        <ul class="comment-list">
+          <li *ngFor="let comment of comments">
+            {{ comment?.comment }}
+            <button mat-icon-button (click)="deleteComment(comment?.commentId)">
+              <mat-icon>clear</mat-icon>
+            </button>
+          </li>
+        </ul>
+        <div *ngIf="!comments || comments.length === 0" class="no-comments">
+          There are no comments, maybe add one?
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

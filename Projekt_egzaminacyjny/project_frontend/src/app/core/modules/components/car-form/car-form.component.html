@@ -1,0 +1,100 @@
+<form
+  [formGroup]="carFormService.carForm"
+  (ngSubmit)="submitForm()"
+  class="mat-elevation-z2"
+>
+  <div class="form-field">
+    <mat-form-field appearance="fill">
+      <mat-label>Car Company Name</mat-label>
+      <input matInput type="text" formControlName="carCompanyName" />
+    </mat-form-field>
+    <div
+      *ngIf="
+        carFormService.carForm.get('carCompanyName')?.hasError('required') &&
+        carFormService.carForm.get('carCompanyName')?.touched
+      "
+      class="error-message"
+    >
+      Car Company Name is required
+    </div>
+  </div>
+
+  <div class="form-field">
+    <mat-form-field appearance="fill">
+      <mat-label>Car Model</mat-label>
+      <input matInput type="text" formControlName="carModel" />
+    </mat-form-field>
+    <div
+      *ngIf="
+        carFormService.carForm.get('carModel')?.hasError('required') &&
+        carFormService.carForm.get('carModel')?.touched
+      "
+      class="error-message"
+    >
+      Car Model is required
+    </div>
+  </div>
+
+  <div class="form-field">
+    <mat-form-field appearance="fill">
+      <mat-label>Car Year</mat-label>
+      <input matInput type="number" formControlName="carYear" />
+    </mat-form-field>
+    <div
+      *ngIf="
+        carFormService.carForm.get('carYear')?.hasError('required') &&
+        carFormService.carForm.get('carYear')?.touched
+      "
+      class="error-message"
+    >
+      Car Year is required
+    </div>
+  </div>
+
+  <div formArrayName="carColors" class="car-colors">
+    <ng-container *ngFor="let color of getColors(); let i = index">
+      <div class="form-field">
+        <mat-form-field appearance="fill">
+          <mat-label>Color {{ i + 1 }}</mat-label>
+          <input matInput [formControlName]="i" />
+        </mat-form-field>
+        <button mat-icon-button type="button" (click)="removeColor(i)">
+          <mat-icon>remove_circle</mat-icon>
+        </button>
+        <div
+          *ngIf="
+            carFormService.carForm
+              .get('carColors.' + i)
+              ?.hasError('required') &&
+            carFormService.carForm.get('carColors.' + i)?.touched
+          "
+          class="error-message"
+        >
+          Color is required
+        </div>
+      </div>
+    </ng-container>
+    <div class="button-container">
+      <button
+        mat-button
+        type="button"
+        (click)="addColor()"
+        class="add-color-button"
+      >
+        Add Color
+      </button>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <button mat-flat-button type="button" (click)="cancel()">Cancel</button>
+
+    <button
+      mat-raised-button
+      type="submit"
+      [disabled]="!carFormService.carForm.valid"
+    >
+      {{ isEditMode ? "Edit Car" : "Add Car" }}
+    </button>
+  </div>
+</form>

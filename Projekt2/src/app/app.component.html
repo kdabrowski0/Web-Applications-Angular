@@ -1,0 +1,13 @@
+<body>
+  <app-car-form (addCar)="onAddCar($event)" (closeModalEvent)="closeCarFormModal()"></app-car-form>
+  <app-car-list
+    [cars]="cars"
+    [rentedCars]="rentedCars"
+    (deleteCar)="onRemoveCar($event)"
+    [availableCarsCount]="availableCarsCount"
+    [rentedCarsCount]="rentedCarsCount"
+    (changeRentedStatus)="onChangeRentedStatus($event)"
+    [totalCarsCount]="totalCarsCount"
+    (closeModalEvent)="closeCarFormModal()"
+  ></app-car-list>
+</body>

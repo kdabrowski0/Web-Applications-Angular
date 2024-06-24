@@ -1,0 +1,8 @@
+<div *ngIf="todo">
+    <h2>{{ todo.id }}</h2>
+    <h2>{{ todo.name }}</h2>
+    <h2>{{ todo.isComplete }}</h2>
+  </div>
+  <button (click)="delete(todo.id)">Delete</button>
+  <button [routerLink]="['/form', todo.id]">Edit</button>
+  <button (click)="goBack()">Back</button>

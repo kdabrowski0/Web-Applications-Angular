@@ -1,0 +1,65 @@
+.form-field {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  @media (max-width: 600px) {
+    flex-direction: column; 
+    align-items: center; 
+    width: 100%;
+  }
+
+  div.error-message {
+    color: red;
+    font-size: 0.85em;
+    margin-top: 4px;
+  }
+
+  mat-form-field {
+    flex: 1; 
+    max-width: 400px;
+    width: 100%;
+    margin-right: 8px;
+    @media (max-width: 600px) {
+      margin-right: 0;
+      max-width: fit-content;
+    }
+  }
+  button {
+    margin-top: 16px;
+  }
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+
+  button {
+    max-width: 120px;
+    margin: 0 8px;
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+
+    button {
+      margin-top: 8px;
+      max-width: 100%;
+    }
+  }
+}
+
+.add-color-button {
+  width: 100%;
+  max-width: 200px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.mat-icon-button {
+  margin-left: 8px; 
+}
+

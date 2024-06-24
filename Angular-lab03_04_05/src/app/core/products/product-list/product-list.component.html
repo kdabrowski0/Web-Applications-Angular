@@ -1,0 +1,42 @@
+<div>
+  <app-product-form (productAdded)="onProductAdded($event)"></app-product-form>
+  <h1>Product List</h1>
+  <ul>
+    <li *ngFor="let product of products">
+      <input type="checkbox" [(ngModel)]="product.checked" />
+      <span [class.checked]="product.getChecked()"></span>
+      <app-product-amount
+        [amount]="product.getAmount()"
+        (incrementEvent)="incrementAmount(product)"
+        (decrementEvent)="decrementAmount(product)"
+      >
+      </app-product-amount>
+      <div>
+        <span>{{ product | productFormat }}</span>
+      </div>
+      <button (click)="onDeleteProduct(product)">Delete</button>
+      <app-confirmation-modal [visible]="modalsVisible[product.getName()]">
+        <h1>
+          Czy napewno chcesz usunąć {{ product.getName() }} (ilość:
+          {{ product.getAmount() }})?
+        </h1>
+        <button (click)="confirmDeleteProduct(product)">Tak</button>
+        <button (click)="closeModal(product)">Nie</button>
+      </app-confirmation-modal>
+    </li>
+  </ul>
+  <app-alert
+    *ngIf="alertMessage"
+    [message]="alertMessage"
+    (closeClicked)="closeAlert('')"
+  ></app-alert>
+  <button *ngIf="areAnyProductsChecked()" (click)="onDeleteBought()">
+    Usuń kupione
+  </button>
+</div>
+<h1>Product history</h1>
+<ul>
+  <li *ngFor="let product of purchasedProducts">
+    <span>{{ product | productFormat }}</span>
+  </li>
+</ul>

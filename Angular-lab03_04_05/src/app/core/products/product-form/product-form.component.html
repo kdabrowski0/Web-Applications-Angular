@@ -1,0 +1,8 @@
+<div>
+    <h1>Add Product</h1>
+    <form (submit)="submitForm()">
+      <label for="name">Name:</label>
+      <input type="text" id="name" [(ngModel)]="productName" name="name" required>
+      <button type="submit">Save</button>
+    </form>
+  </div>

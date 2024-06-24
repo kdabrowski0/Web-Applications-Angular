@@ -1,0 +1,16 @@
+<div>
+  <ul>
+    <li *ngFor="let todo of todos">
+      {{ todo | json }}
+      <a [routerLink]="['/details', todo.id]">{{ todo.name }}</a>
+      <button (click)="delete(todo.id)">Delete</button>
+      <button [routerLink]="['/form', todo.id]">Edit</button>
+    </li>
+  </ul>
+</div>
+<button (click)="previousPage()">Previous</button>
+<span>Page {{ currentPage }}</span>
+<button (click)="nextPage()">Next</button>
+<div>
+  <button [routerLink]="['/form']">Add New</button>
+</div>

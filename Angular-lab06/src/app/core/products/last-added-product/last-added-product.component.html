@@ -1,0 +1,7 @@
+<div *ngIf="lastAddedProduct$ | async as lastAddedProduct; else noProduct">
+  <h2>Last Added Product:</h2>
+  <p>{{ lastAddedProduct | productFormat }}</p>
+</div>
+<ng-template #noProduct>
+  <p>No product added yet.</p>
+</ng-template>

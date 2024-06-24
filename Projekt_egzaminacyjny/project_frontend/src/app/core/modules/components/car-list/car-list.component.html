@@ -1,0 +1,58 @@
+<div *ngIf="isFetching" class="loading-container">
+  <app-loading-modal></app-loading-modal>
+</div>
+<div *ngIf="!isFetching" class="filter-container">
+  <mat-form-field class="filter-field">
+    <mat-label>Sort By:</mat-label>
+    <mat-select (selectionChange)="onSortChange($event)">
+      <mat-option value="date">Date</mat-option>
+      <mat-option value="year">Year</mat-option>
+      <mat-option value="company">Company Name</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="filter-field">
+    <mat-label>Filter by Company:</mat-label>
+    <mat-select (selectionChange)="updateCompanyFilter($event)">
+      <mat-option value="all">All</mat-option>
+      <mat-option
+        *ngFor="let companyName of uniqueCompanyNames"
+        [value]="companyName"
+      >{{ companyName }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="filter-field">
+    <mat-label>Filter by Model:</mat-label>
+    <input matInput [(ngModel)]="filterByModel" (input)="updateModelFilter($event)" placeholder="Enter car model">
+  </mat-form-field>
+
+  <mat-checkbox class="filter-checkbox" (change)="updateEmptyColorFilter()">
+    Only cars with colors
+  </mat-checkbox>
+
+  <div class="car-list">
+    <ul>
+      <li class="car-list__item" *ngFor="let car of pageSlice">
+        <div class="car-list__item__info">
+          <div class="car-list__item__info__title">
+            {{ car.carCompanyName }}
+          </div>
+          <div class="car-list__item__info__description">
+            {{ car.carModel }}
+          </div>
+          <div class="car-list__item__info__description">
+            {{ car.carYear }}
+          </div>
+          <a [routerLink]="['/cars', car.carId]">View Details</a>
+        </div>
+      </li>
+    </ul>
+    <mat-paginator
+      [length]="totalCarsCount"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      (page)="onPageChange($event)"
+    ></mat-paginator>
+  </div>
+</div>

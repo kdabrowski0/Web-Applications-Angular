@@ -1,0 +1,34 @@
+<form [formGroup]="formService.userForm" (ngSubmit)="submitForm()">
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" formControlName="name" />
+    <div
+      *ngIf="
+        formService.userForm.get('name')?.hasError('required') &&
+        formService.userForm.get('name')?.touched
+      "
+    >
+      Name is required
+    </div>
+  </div>
+
+  <div formArrayName="addresses">
+    <ng-container *ngFor="let address of getAddresses(); let i = index">
+      <ul>
+        <li>
+          <input
+            type="text"
+            placeholder="add address..."
+            [formControlName]="i"
+          />
+          <button (click)="removeAddress(i)">Remove Address</button>
+        </li>
+      </ul>
+    </ng-container>
+    <button type="button" (click)="addAddress()">Add Address</button>
+  </div>
+
+  <button type="submit" [disabled]="!formService.userForm.valid">
+    {{ isEditMode ? 'Edit User' : 'Add User' }}
+  </button>
+</form>

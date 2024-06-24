@@ -1,0 +1,52 @@
+<div class="modal">
+  <div class="modal-content">
+    <form (ngSubmit)="onSubmit()">
+      <label for="companyName">companyName:</label>
+      <input
+        type="text"
+        id="companyName"
+        [(ngModel)]="newCar.companyName"
+        [ngModelOptions]="{ standalone: true }"
+        required
+      />
+
+      <label for="model">Model:</label>
+      <input
+        type="text"
+        id="model"
+        [(ngModel)]="newCar.model"
+        [ngModelOptions]="{ standalone: true }"
+        required
+      />
+
+      <label for="year">Year:</label>
+      <input
+        type="number"
+        id="year"
+        [(ngModel)]="newCar.year"
+        [ngModelOptions]="{ standalone: true }"
+        required
+      />
+
+      <label for="rented">Rented:</label>
+      <input
+        type="checkbox"
+        id="rented"
+        [(ngModel)]="newCar.rented"
+        [ngModelOptions]="{ standalone: true }"
+      />
+
+      <button type="submit">Add Car</button>
+    </form>
+  </div>
+  <app-confirmation-modal
+    [visible]="isConfirmationModalVisible"
+    (closeModalEvent)="closeConfirmationModal()"
+  >
+    <p>
+      Are you sure you want to add {{ newCar.companyName }} {{ newCar.model }}?
+    </p>
+    <button (click)="confirmAddCar()">Yes</button>
+    <button (click)="closeConfirmationModal()">No</button>
+  </app-confirmation-modal>
+</div>

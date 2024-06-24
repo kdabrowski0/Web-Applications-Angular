@@ -1,0 +1,124 @@
+<div>
+  <h1>User Form</h1>
+  <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+    <div>
+      <label for="name">Name</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        [(ngModel)]="user.name"
+        required
+        minlength="3"
+        pattern="[A-Z][a-zA-Z]*"
+        #nameInput="ngModel"
+        [ngClass]="{
+          error: nameInput.invalid && (nameInput.dirty || nameInput.touched)
+        }"
+      />
+      <div
+        class="error-message"
+        *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)"
+      >
+        <div *ngIf="nameInput.errors?.['required']">Name is required.</div>
+        <div *ngIf="nameInput.errors?.['minlength']">
+          Name must be at least 3 characters long.
+        </div>
+        <div *ngIf="nameInput.errors?.['pattern']">
+          Name must contain only letters and must start with a capital letter.
+        </div>
+      </div>
+    </div>
+    <div>
+      <label for="surname">Surname</label>
+      <input
+        type="text"
+        id="surname"
+        name="surname"
+        [(ngModel)]="user.surname"
+        required
+        minlength="3"
+        pattern="[A-Z][a-zA-Z]*"
+        #surnameInput="ngModel"
+        [ngClass]="{
+          error:
+            surnameInput.invalid && (surnameInput.dirty || surnameInput.touched)
+        }"
+      />
+      <div
+        class="error-message"
+        *ngIf="
+          surnameInput.invalid && (surnameInput.dirty || surnameInput.touched)
+        "
+      >
+        <div *ngIf="surnameInput.errors?.['required']">
+          Surname is required.
+        </div>
+        <div *ngIf="surnameInput.errors?.['minlength']">
+          Surname must be at least 3 characters long.
+        </div>
+        <div *ngIf="surnameInput.errors?.['pattern']">
+          Surname must contain only letters and must start with a capital
+          letter.
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <label for="age">Age</label>
+      <input
+        type="number"
+        id="age"
+        name="age"
+        [(ngModel)]="user.age"
+        required
+        min="1"
+        max="99"
+        #ageInput="ngModel"
+        [ngClass]="{
+          error: ageInput.invalid && (ageInput.dirty || ageInput.touched)
+        }"
+      />
+      <div *ngIf="ageInput.invalid && (ageInput.dirty || ageInput.touched)">
+        <div *ngIf="ageInput.errors?.['required']">Age is required.</div>
+        <div *ngIf="ageInput.errors?.['min'] || ageInput.errors?.['max']">
+          Age must be between 1 and 99.
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <label for="postalCode">Postal Code</label>
+      <input
+        type="text"
+        id="postalCode"
+        name="postalCode"
+        [(ngModel)]="user.postalCode"
+        required
+        pattern="\d{2}-\d{3}"
+        #postalCodeInput="ngModel"
+        [ngClass]="{
+          error:
+            postalCodeInput.invalid &&
+            (postalCodeInput.dirty || postalCodeInput.touched)
+        }"
+      />
+      <div
+        class="error-message"
+        *ngIf="
+          postalCodeInput.invalid &&
+          (postalCodeInput.dirty || postalCodeInput.touched)
+        "
+      >
+        <div *ngIf="postalCodeInput.errors?.['required']">
+          Postal Code is required.
+        </div>
+        <div *ngIf="postalCodeInput.errors?.['pattern']">
+          Postal Code must be in the format 00-000.
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="userForm.invalid">Submit</button>
+  </form>
+</div>

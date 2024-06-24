@@ -1,0 +1,43 @@
+<div>
+  <app-product-form (productAdded)="onProductAdded($event)"></app-product-form>
+  <h1>Product List</h1>
+  <ul>
+    <li *ngFor="let product of products">
+      <input type="checkbox" [(ngModel)]="product.isBought" />
+      <span [class.checked]="product.isBought"></span>
+      <app-product-amount
+        [amount]="product.amount"
+        (incrementEvent)="incrementAmount(product)"
+        (decrementEvent)="decrementAmount(product)"
+      >
+      </app-product-amount>
+      <div>
+        <span>{{ product | productFormat }}</span>
+      </div>
+      <button (click)="onDeleteProduct(product)">Delete</button>
+      <app-confirmation-modal [visible]="modalsVisible[product.name]">
+        <h1>
+          Czy napewno chcesz usunąć {{ product.name }} (ilość:
+          {{ product.amount }})?
+        </h1>
+        <button (click)="confirmDeleteProduct(product)">Tak</button>
+        <button (click)="closeModal(product)">Nie</button>
+      </app-confirmation-modal>
+    </li>
+  </ul>
+  <app-alert
+    *ngIf="alertMessage"
+    [message]="alertMessage"
+    (closeClicked)="closeAlert('')"
+  ></app-alert>
+  <button *ngIf="areAnyProductsChecked()" (click)="onDeleteBought()">
+    Usuń kupione
+  </button>
+</div>
+<h1>Product history</h1>
+<ul>
+  <li *ngFor="let product of purchasedProducts">
+    <span>{{ product | productFormat }}</span>
+    <span *ngIf="product.isBought"> - Purchase Date: {{ product.purchaseDate | date: 'short' }}</span>
+  </li>
+</ul>

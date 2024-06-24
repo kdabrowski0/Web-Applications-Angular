@@ -1,0 +1,32 @@
+<h1>Car List. Available cars amount: {{ availableCarsCount }} of {{totalCarsCount}}</h1>
+<div *ngFor="let car of cars">
+  <p>{{ car | carFormat }}</p>
+  <button (click)="onDeleteCar(car)">
+    Delete
+  </button>
+  <button (click)="onChangeRentedStatus(car)">Change Rented Status</button>
+</div>
+<div *ngIf="cars.length === 0">
+  <p>No available cars yet!</p>
+</div>
+
+<h1>Rented List. Rented cars amount: {{ rentedCarsCount }} of {{totalCarsCount}}</h1>
+<div *ngFor="let car of rentedCars">
+  <p>{{ car | carFormat }}</p>
+  <button (click)="onDeleteCar(car)">
+    Delete
+  </button>
+  <button (click)="onChangeRentedStatus(car)">Change Rented Status</button>
+</div>
+<div *ngIf="rentedCars.length === 0">
+  <p>No rented cars yet!</p>
+</div>
+
+<app-confirmation-modal
+  [visible]="isConfirmationModalVisible"
+  (closeModalEvent)="closeModal()"
+>
+  <p>{{ modalMessage }}</p>
+  <button (click)="confirmModalAction(true)">Yes</button>
+  <button (click)="confirmModalAction(false)">No</button>
+</app-confirmation-modal>

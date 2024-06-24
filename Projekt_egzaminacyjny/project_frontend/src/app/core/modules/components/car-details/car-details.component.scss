@@ -1,0 +1,94 @@
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .car-details {
+    width: 80%;  
+    margin: 0 auto;
+  
+    @media (min-width: 768px) {
+      width: 60%;  
+    }
+  
+    .car-details__item {
+      border: 1px solid #ddd;
+      padding: 16px;
+      margin-bottom: 16px;
+  
+      .car-details__item__info {
+        display: flex;
+        flex-direction: column;
+  
+        .car-details__item__info__title {
+          font-weight: bold;
+          margin-bottom: 8px;
+        }
+  
+        .car-details__item__info__description {
+          margin-bottom: 8px;
+          color: #555;
+        }
+  
+        button {
+          margin-top: 8px;
+        }
+      }
+  
+      .car-details__comment-input {
+        display: flex;
+        align-items: flex-end;
+        margin-top: 16px;
+  
+        mat-form-field {
+          flex: 1;
+          margin-top: 24px;
+  
+          input {
+            width: 100%;
+          }
+        }
+  
+        button {
+          flex-shrink: 0;
+        }
+      }
+  
+      .car-details__comment__section {
+        margin-top: 16px;
+        border-top: 1px solid #eee;
+  
+        .section-title {
+          font-weight: bold;
+        }
+  
+        .comment-list {
+          list-style-type: none;
+          padding: 0;
+  
+          li {
+            display: flex;
+            flex-direction: row; 
+            justify-content: space-between;
+            align-items: center;  
+  
+            margin-bottom: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #eee;
+  
+            button {
+              margin-top: 8px;
+              margin-left: 0;  
+            }
+          }
+        }
+  
+        .no-comments {
+          color: #888;
+        }
+      }
+    }
+  }
+  
